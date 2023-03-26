@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>MATRIX...</title>
+</head>
+<body>
+    <canvas style="position: fixed; top: 0; left: 0; z-index: -1;"></canvas>
+
+    <div id="option">
+        <div  id="btn1" class="active">&#8230;</div>
+        <div id="btn" style="    position: absolute; top: 78px; right: 30px;">&#9974;</div>
+    </div>
+
+    <div id="main">
+        <div id="box1">
+            <div id="inputs">
+                <input type="text" placeholder="Enter your text" style="width:80%" id="data" />
+                <div id="msg" style="color: rgb(1, 87, 1);"><h2>Hit to Generate QR code</h2></div>
+            </div>
+
+            <div id="outputbox">
+                
+            </div>
+        </div>
+        <div id="box2">
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("outputbox"), {
+            width : 100,
+            height : 100
+        });
+        
+        function makeCode () {		
+            var elText = document.getElementById("data");
+            qrcode.makeCode(elText.value);
+        }
+        
+        makeCode();
+        
+        $("#data").
+            on("blur", function () {
+                makeCode();
+            }).
+            on("keydown", function (e) {
+                if (e.keyCode == 13) {
+                    makeCode();
+                }
+            });
+        </script>
+
+    <!-- <script type="text/javascript" src="./index.js"></script> -->
+</body>
+</html>
